@@ -22,14 +22,14 @@ It accepts the index of the item you want to be selected in the selectbox
 
 ### multi
 Type: `String`
-Default: 'false'
-Values: 'true' | 'false'
+Default: `false`
+Values: `true` | `false`
 
 If you want your list to be multi-select
 
 ### title
 Type: `String`
-Default: 'Select'
+Default: `Select`
 
 If you want custom title for the selectbox. In case of multi select it'll be visible all the time, in case of single select only if no item is selected
 
