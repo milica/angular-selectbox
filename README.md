@@ -6,7 +6,7 @@ It accepts flat list such as `[1, 2, 3, 4, 5]`, but you can also provide array o
 
     [{id: 1, name: 'item 1'}, {id: 2, name: 'item 2'}, {id: 3, name: 'item 3'}]
 
-[Demo](#http://milica.github.io/angular-selectbox)
+[Demo](http://milica.github.io/angular-selectbox/)
 
 ### Options
 
