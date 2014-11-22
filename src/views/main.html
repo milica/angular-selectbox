@@ -1,0 +1,43 @@
+<div class="main">
+    <h1>SelectBox for <span class="angular-js">AngularJS</span></h1>
+
+    <div class="content">
+
+        <div class="column">
+            <h2>Flat array (single select)</h2>
+
+            <selectbox list="view.list1" ng-model="view.selected1"></selectbox>
+
+            <h3>List</h3>
+            <pre>{{ view.list1 }}</pre>
+
+            <h3>Selected</h3>
+            <pre>{{ view.list1[view.selected1] }}</pre>
+        </div>
+
+        <div class="column">
+            <h2>Array of objects (single select)</h2>
+
+            <selectbox list="view.list2" ng-model="view.selected2"></selectbox>
+
+            <h3>List</h3>
+            <pre>{{ view.list2 }}</pre>
+
+            <h3>Selected</h3>
+            <pre>{{ view.list2[view.selected2] }}</pre>
+        </div>
+
+        <div class="column">
+            <h2>Array of objects (multi select)</h2>
+
+            <selectbox title="Planets" list="view.list3" ng-model="view.selected3" multi="true"></selectbox>
+
+            <h3>List</h3>
+            <pre>{{ view.list3 }}</pre>
+
+            <h3>Selected</h3>
+            <pre ng-repeat="selected in view.selected3">{{ view.list3[selected] }}</pre>
+        </div>
+
+    </div>
+</div>
