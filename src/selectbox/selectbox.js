@@ -49,6 +49,8 @@ angular.module('selectbox', [])
             $scope.view.show = false;
 
             $scope.$apply();
+
+            unbindEvents();
         };
 
         /**
@@ -99,6 +101,8 @@ angular.module('selectbox', [])
                 }
             }
 
+            console.log($scope.view.focus);
+
             $scope.$apply();
 
             var $container = $element[0].querySelector('.mad-selectbox-dropdown');
@@ -142,8 +146,7 @@ angular.module('selectbox', [])
                 $document.bind('click', clickHandler);
                 $element.on('keydown', keyHandler);
             } else {
-                $document.unbind('click', clickHandler);
-                $element.off('keydown', keyHandler);
+                unbindEvents();
             }
         };
 
@@ -197,9 +200,16 @@ angular.module('selectbox', [])
             }
         });
 
-        $scope.$on('$destroy', function() {
+        var unbindEvents = function() {
+
+            $scope.view.focus = -1;
             $document.unbind('click', clickHandler);
             $element.off('keydown', keyHandler);
+
+        };
+
+        $scope.$on('$destroy', function() {
+            unbindEvents();
         });
 
     }])
