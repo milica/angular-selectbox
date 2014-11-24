@@ -64,7 +64,7 @@ angular.module('selectbox', [])
         var keyHandler = function(e) {
 
             // enter | space
-            if ([13, 32].indexOf(e.keyCode) !== -1 && $scope.view.focus) {
+            if ([13, 32].indexOf(e.keyCode) !== -1 && typeof $scope.view.focus !== 'undefined') {
 
                 $scope.selectItem($scope.view.focus);
 
