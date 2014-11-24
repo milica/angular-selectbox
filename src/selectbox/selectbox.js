@@ -101,8 +101,6 @@ angular.module('selectbox', [])
                 }
             }
 
-            console.log($scope.view.focus);
-
             $scope.$apply();
 
             var $container = $element[0].querySelector('.mad-selectbox-dropdown');
