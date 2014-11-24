@@ -69,6 +69,7 @@ angular.module('selectbox', [])
                 $scope.selectItem($scope.view.focus);
 
                 if (!$scope.multi) {
+                    unbindEvents();
                     $scope.view.show = false;
                 }
 
