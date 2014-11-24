@@ -2,9 +2,8 @@ Selectbox for AngularJS
 ====
 
 This is AngularJS directive for the custom selectbox.
-It accepts flat list such as `[1, 2, 3, 4, 5]`, but you can also provide array of object which has to be formatted as follows:
-
-    [{id: 1, name: 'item 1'}, {id: 2, name: 'item 2'}, {id: 3, name: 'item 3'}]
+It accepts flat list such as `[1, 2, 3, 4, 5]`, but you can also provide array of object which has to be formatted as follows: `[{id: 1, name: 'item 1'}, {id: 2, name: 'item 2'}, {id: 3, name: 'item 3'}]`
+It's possible to go through the list with up and down key arrows, and to select the item by hitting enter or space.
 
 [Demo](http://milica.github.io/angular-selectbox/)
 

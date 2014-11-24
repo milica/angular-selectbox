@@ -26,6 +26,7 @@
   vertical-align: middle;
   min-width: 150px;
   position: relative;
+  outline: none;
 
   &.mad-selectbox-multi {
 
@@ -100,7 +101,8 @@
           background-color: #f3f3f3;
         }
       }
-      &:hover {
+      &:hover,
+      &.focus {
         .mad-selectbox-item {
           background-color: #fcfcfc;
         }
@@ -112,6 +114,12 @@
 
       .mad-selectbox-item {
         @extend %link;
+      }
+
+      &.mad-empty {
+        padding: 10px;
+        font-size: 14px;
+        color: #999;
       }
     }
   }

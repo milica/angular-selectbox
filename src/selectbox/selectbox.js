@@ -13,10 +13,21 @@ angular.module('selectbox', [])
 
         };
     }])
-    .controller('SelectBoxCtrl', ['$scope', '$document', function($scope, $document) {
+    .service('SelectBox', [function() {
+        return {
+            counter: 0,
+            init: function() {
+                this.counter += 1;
+            }
+        };
+    }])
+    .controller('SelectBoxCtrl', ['$scope', '$document', '$element', 'SelectBox', function($scope, $document, $element, SelectBox) {
+
+        SelectBox.init();
 
         $scope.view = {};
         $scope.view.show = false;
+        $scope.view.tabindex = SelectBox.counter;
         $scope.view.instanceId = 'inst-' + Date.now();
 
         /**
@@ -38,6 +49,70 @@ angular.module('selectbox', [])
             $scope.view.show = false;
 
             $scope.$apply();
+        };
+
+        /**
+         * Handle keyboard key press
+         * - if enter or space do the selection of the focused item form the list
+         * - if down or up key arrow focus the appropriate item from the list
+         *
+         * @param e
+         * @returns {boolean}
+         */
+        var keyHandler = function(e) {
+
+            // enter | space
+            if ([13, 32].indexOf(e.keyCode) !== -1 && $scope.view.focus) {
+
+                $scope.selectItem($scope.view.focus);
+
+                if (!$scope.multi) {
+                    $scope.view.show = false;
+                }
+
+                $scope.$apply();
+
+                return false;
+            }
+
+            if ([38, 40].indexOf(e.keyCode) === -1) { return false; }
+
+            var min = 0;
+            var max = $scope.list.length - 1;
+
+            $scope.view.focus = (typeof $scope.view.focus === 'undefined') ? -1 : $scope.view.focus;
+
+            // key arrow down
+            if (e.keyCode === 40) {
+                if ($scope.view.focus === max) {
+                    $scope.view.focus = min;
+                } else {
+                    $scope.view.focus += 1;
+                }
+            }
+            // key arrow up
+            if (e.keyCode === 38) {
+                if ($scope.view.focus <= min) {
+                    $scope.view.focus = max;
+                } else {
+                    $scope.view.focus -= 1;
+                }
+            }
+
+            $scope.$apply();
+
+            var $container = $element[0].querySelector('.mad-selectbox-dropdown');
+            var $focus = $container.querySelector('.focus');
+            var containerHeight = $container.offsetHeight;
+            var currentOffset = $focus.offsetHeight * ($scope.view.focus + 1);
+
+            if (currentOffset >= containerHeight) {
+                $container.scrollTop = currentOffset;
+            } else if (currentOffset <= $container.scrollTop) {
+                $container.scrollTop = 0;
+            }
+
+
         };
 
         /**
@@ -65,8 +140,10 @@ angular.module('selectbox', [])
 
             if ($scope.view.show) {
                 $document.bind('click', clickHandler);
+                $element.on('keydown', keyHandler);
             } else {
                 $document.unbind('click', clickHandler);
+                $element.off('keydown', keyHandler);
             }
         };
 
@@ -122,6 +199,7 @@ angular.module('selectbox', [])
 
         $scope.$on('$destroy', function() {
             $document.unbind('click', clickHandler);
+            $element.off('keydown', keyHandler);
         });
 
     }])
@@ -138,7 +216,7 @@ angular.module('selectbox', [])
                 handler: '&'
             },
             controller: 'SelectBoxCtrl',
-            template: '<div class="mad-selectbox" ng-class="{\'mad-selectbox-multi\': multi}">'+
+            template: '<div tabindex="{{ view.tabindex }}" class="mad-selectbox" ng-class="{\'mad-selectbox-multi\': multi}">'+
                         '<a href ' +
                             'id="{{ view.instanceId }}"'+
                             'class="mad-selectbox-toggle"'+
@@ -148,9 +226,10 @@ angular.module('selectbox', [])
                         '</a>'+
                         '<ul class="mad-selectbox-dropdown" ng-show="view.show">'+
                             '<li ng-repeat="item in list track by $index"'+
-                                'ng-class="{active: multi ? (view.selected | contains:item.id) : ($index === index)}">'+
+                                'ng-class="{active: multi ? (view.selected | contains:item.id) : ($index === index), focus: ($index === view.focus)}">'+
                                 '<a href class="mad-selectbox-item" ng-click="selectItem($index)">{{ item.name || item }}</a>'+
                             '</li>'+
+                            '<li class="mad-empty" ng-if="list.length === 0">the list is empty</li>'+
                         '</ul>'+
                       '</div>'
         };
