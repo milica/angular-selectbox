@@ -177,9 +177,6 @@ angular.module('selectbox', [])
                 $scope.view.selected = $scope.list[index];
                 $scope.index = index;
             }
-
-            $scope.handler();
-
         };
 
         /* init parse selected */
@@ -196,6 +193,9 @@ angular.module('selectbox', [])
         $scope.$watch('index', function(n, o) {
             if (n !== o) {
                 parseSelected();
+                // we only call the handler function after the index was updated:
+                // (modified by @paulovelho)
+                $scope.handler();
             }
         });
 
