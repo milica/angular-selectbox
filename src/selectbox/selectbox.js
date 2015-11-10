@@ -155,8 +155,7 @@ angular.module('selectbox', [])
          * @param index
          */
         $scope.selectItem = function(index) {
-            var selectedValue = $scope.list[index].value;
-            
+
             if ($scope.multi) {
 
                 var selectedId = $scope.list[index].id;
@@ -170,7 +169,6 @@ angular.module('selectbox', [])
 
                 } else {
                     $scope.view.selected.push(selectedId);
-                    $scope.selectedValue.push(selectedValue || selectedId);
                 }
 
                 $scope.index = $scope.view.selected;
@@ -178,7 +176,6 @@ angular.module('selectbox', [])
             } else {
                 $scope.view.selected = $scope.list[index];
                 $scope.index = index;
-                $scope.selectedValue = selectedValue || index;
             }
         };
 
@@ -221,7 +218,7 @@ angular.module('selectbox', [])
             replace: true,
             scope: {
                 list: '=',
-                selectedValue: '=ngModel',
+                index: '=ngModel',
                 multi: '@',
                 title: '@',
                 min: '@',
