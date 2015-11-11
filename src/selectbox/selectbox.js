@@ -222,13 +222,14 @@ angular.module('selectbox', [])
                 multi: '@',
                 title: '@',
                 min: '@',
+                 scalss:'@',
                 handler: '&'
             },
             controller: 'SelectBoxCtrl',
             template: '<div tabindex="{{ view.tabindex }}" class="mad-selectbox" ng-class="{\'mad-selectbox-multi\': multi}">'+
                         '<a href ' +
                             'id="{{ view.instanceId }}"'+
-                            'class="mad-selectbox-toggle"'+
+                            'class="{{scalss}}"'+
                             'ng-click="toggleList()"'+
                             'ng-class="{active: view.show}">'+
                             '{{ multi ? (title || \'Select\') : (view.selected.name || view.selected || \'Select\') }}'+
