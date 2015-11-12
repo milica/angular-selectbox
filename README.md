@@ -1,53 +1,80 @@
-Selectbox for AngularJS
+angular-selectbox
 ====
 
-This is AngularJS directive for the custom selectbox.
-It accepts flat list such as `[1, 2, 3, 4, 5]`, but you can also provide array of object which has to be formatted as follows: `[{id: 1, name: 'item 1'}, {id: 2, name: 'item 2'}, {id: 3, name: 'item 3'}]`
-It's possible to go through the list with up and down key arrows, and to select the item by hitting enter or space.
+This is simple AngularJS custom selecbox which also supports multi select as well.
+
+It's possible to go through the list with up and down key arrows, and to select the item by hitting enter for single select,
+or by hitting space for multi select.
 
 [Demo](http://milica.github.io/angular-selectbox/)
 
-### Options
+### Installation
 
-#### list
+  1. Add the `angular-selectbox` module to your dependencies
+
+    ```javascript
+    angular.module('myApp', ['angular-selectbox']);
+    ```
+
+  2. Use the `angular-selectbox` directive for single select
+  
+    ```html
+    <selectbox options="array" value="value"></selectbox>
+    ```
+
+  3. Use the `angular-selectbox` directive for multi select
+  
+    ```html
+    <selectbox-multi options="array" values="value"></selectbox-multi>
+    ```
+
+### Parameters
+
+#### options
 Type: `Object`
 
-It accepts the array you want to be listed in the selectbox
+An array you want to be listed in the selectbox.
+ 
+You can use:
 
-#### index
+  - flat array: `[1, 2, 3, 4, 5]`
+  
+  - collection:  `[{id: 1, label: 'item 1'}, {id: 2, label: 'item 2'}, {id: 3, label: 'item 3'}]`
+
+#### value
 Type: `Integer`
 
-It accepts the index of the item you want to be selected in the selectbox
+Value that is selected in selectbox.
+ 
+If it's flat array then it must be value from the list. 
+From the first example (flat list), if you want to select number `2`, than you define `2` to be value.
 
-### multi
+If it's collection the value is actually value of identifier (for example `id`).
+From the second example (collection) if you want to chose `item 1` you pick it's identifier value, which is `1`.
+
+#### onChange
+Type: `'Function'`
+
+Callback function when value is selected.
+
+#### idKey
 Type: `String`
 
-Default: `false`
+Default: `id`
 
-Values: `true` | `false`
+Name of the identifier key, by default it's `id`
 
-If you want your list to be multi-select
+#### labelKey
+Type: `String`
 
-### title
+Default: `label`
+
+Name of the label key, by default it's `label`
+
+#### title
 Type: `String`
 
 Default: `Select`
 
-If you want custom title for the selectbox. In case of multi select it'll be visible all the time, in case of single select only if no item is selected
-
-### min
-Type: `Integer`
-
-Minimum number of items that has to be selected in case of multi-select
-
-### handler
-Type: `'Function'`
-
-If you want to trigger certain action in the parent controller when item is selected
-
-
-
-
-
-
+Used with multi-select directive. Defines the title of the select box, next to the number of selected items.
 

@@ -1,0 +1,166 @@
+$height: 32px;
+$border-color: #ddd;
+$background: #fff;
+$color: #555;
+$scrollbar-background: #ccc;
+
+@mixin box-sizing($attr) {
+  box-sizing: $attr;
+  -moz-box-sizing: $attr;
+  -webkit-box-sizing: $attr;
+}
+
+%sb-link {
+  display: block;
+  background-color: $background;
+  padding: 0 10px;
+  font-size: 1em;
+  color: $color;
+  height: $height;
+  line-height: $height;
+  text-decoration: none;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 100%;
+  overflow: hidden;
+  outline: none;
+  @include box-sizing(border-box);
+
+  &:hover,
+  &:active {
+    text-decoration: none;
+    outline: none;
+  }
+}
+
+.sb-container {
+  font-family: 'Helvetica', sans-serif;
+  display: inline-block;
+  vertical-align: middle;
+  width: 200px;
+  outline: none;
+  position: relative;
+  text-align: left;
+
+  &-multi {
+    .sb-item {
+      a {
+        &:before {
+          content: '✓';
+          float: left;
+          color: #ddd;
+          font-size: 1em;;
+          padding-right: 6px;
+        }
+      }
+      &-active {
+        a {
+          &:before {
+            color: #666;
+          }
+        }
+      }
+    }
+  }
+}
+
+.sb-toggle {
+  $size: 5px;
+  border: 1px solid $border-color;
+  position: relative;
+  @extend %sb-link;
+
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    border: {
+      top: $size solid transparent;
+      bottom: $size solid transparent;
+      left: $size solid $color;
+    }
+  }
+
+  &-active {
+    &:after {
+      top: 12px;
+      right: 9px;
+      border: {
+        bottom: none;
+        left: $size solid transparent;
+        right: $size solid transparent;
+        top: $size solid $color;
+      }
+    }
+  }
+
+  &:focus {
+    border: 1px solid darken($border-color, 5%);
+  }
+}
+
+.sb-dropdown {
+  background-color: $background;
+  border: 1px solid $border-color;
+  position: absolute;
+  z-index: 100;
+  top: $height - 1px;
+  left: 0;
+  width: 100%;
+  max-height: 198px;
+  overflow: auto;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+
+  @include box-sizing(border-box);
+
+  &::-webkit-scrollbar {
+    width: 7px;
+    height: 10px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #eee;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: $scrollbar-background;
+    &:hover {
+      background: darken($scrollbar-background, 10%);
+    }
+  }
+}
+
+.sb-item {
+  &:hover,
+  &-focus {
+    a {
+      //background-color: #fcfcfc;
+      box-shadow: 0 0 0 1px #ccc inset;
+    }
+  }
+
+  &-active {
+    a {
+      background-color: #fafafa;
+      color: #444;
+    }
+  }
+
+  &:not(:last-child) {
+    border-bottom: 1px solid $border-color;
+  }
+
+  a {
+    @extend %sb-link;
+  }
+
+  &.sb-empty {
+    padding: 10px;
+    font-size: 14px;
+    color: #999;
+  }
+}
