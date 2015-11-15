@@ -16,13 +16,13 @@ or by hitting space for multi select.
     angular.module('myApp', ['angular-selectbox']);
     ```
 
-  2. Use the `angular-selectbox` directive for single select
+  2. Use the `selectbox` directive for single select
   
     ```html
     <selectbox options="array" value="value"></selectbox>
     ```
 
-  3. Use the `angular-selectbox` directive for multi select
+  3. Use the `selectbox-multi` directive for multi select
   
     ```html
     <selectbox-multi options="array" values="value"></selectbox-multi>
@@ -46,7 +46,7 @@ Type: `Integer`
 
 Value that is selected in selectbox.
  
-If it's flat array then it must be value from the list. 
+If it's flat array then it must be the value from the list. 
 From the first example (flat list), if you want to select number `2`, than you define `2` to be value.
 
 If it's collection the value is actually value of identifier (for example `id`).
@@ -76,5 +76,5 @@ Type: `String`
 
 Default: `Select`
 
-Used with multi-select directive. Defines the title of the select box, next to the number of selected items.
+Used with `selectbox-multi` directive. Defines the title of the select box, next to the number of selected items.
 
