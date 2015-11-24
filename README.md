@@ -10,10 +10,10 @@ or by hitting space for multi select.
 
 ### Installation
 
-  1. Add the `angular-selectbox` module to your dependencies
+  1. Add the `angularSelectbox` module to your dependencies
 
     ```javascript
-    angular.module('myApp', ['angular-selectbox']);
+    angular.module('myApp', ['angularSelectbox']);
     ```
 
   2. Use the `selectbox` directive for single select
