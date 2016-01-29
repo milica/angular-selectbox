@@ -8,6 +8,8 @@ or by hitting space for multi select.
 
 [Demo](http://milica.github.io/angular-selectbox/)
 
+You can download it directly from here or using `bower install angular-selectbox --save`
+
 ### Installation
 
   1. Add the `angularSelectbox` module to your dependencies
