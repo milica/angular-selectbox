@@ -20,7 +20,7 @@
       '     class="sb-toggle" ' +
       '     ng-click="vm.toggle()" ' +
       '     ng-class="{\'sb-toggle-active\': vm.active}">' +
-      '    {{ vm.selected[vm.labelKey] || vm.value || \'Select\' }}' +
+      '    {{ vm.selected[vm.labelKey] || vm.value || vm.title }}' +
       '  </a>' +
       '  <ul class="sb-dropdown" ng-show="vm.active">' +
       '    <li ' +
@@ -47,7 +47,7 @@
       '     class="sb-toggle" ' +
       '     ng-click="vm.toggle()" ' +
       '     ng-class="{\'sb-toggle-active\': vm.active}">' +
-      '    {{ vm.title }}{{ vm.values.length ? (\': \' + vm.values.length) : \'\' }}' +
+      '    {{ vm.title }}{{ vm.values.length ? (\': \' + vm.values.length) : vm.title }}' +
       '  </a>' +
       '  <ul class="sb-dropdown" ng-show="vm.active">' +
       '    <li ' +
@@ -80,6 +80,7 @@
         value: '=',
         idKey: '@',
         labelKey: '@',
+        title: '@',
         onChange: '&'
       }
     };
@@ -97,6 +98,7 @@
       vm.focus = _defaults.focus;
       vm.idKey = vm.idKey || _defaults.idKey;
       vm.labelKey = vm.labelKey || _defaults.labelKey;
+      vm.title = vm.title || _defaults.title;
 
       _getSelected();
 
@@ -449,7 +451,8 @@
       active: false,
       focus: 0,
       idKey: 'id',
-      labelKey: 'label'
+      labelKey: 'label',
+      title: 'Select'
     };
 
     return {
