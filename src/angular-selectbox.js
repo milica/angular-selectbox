@@ -108,6 +108,12 @@
 
       $scope.$on('$destroy', _unbind);
 
+      $scope.$watch('vm.value',function(){
+          // watches value changes from external locations.
+          // Useful for working with socket.io
+          _getSelected();
+      });
+
       /**
        * Get selected object
        *
